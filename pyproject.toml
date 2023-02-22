@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "pbd-declarative-jobs-spike"
+version = "0.1.0"
+description = "Convert abstract YAML into build-job classes"
+authors = ["Your Name <you@example.com>"]
+license = "Apache2"
+readme = "README.md"
+packages = [{include = "pbd_declarative_jobs_spike"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pyyaml = "^6.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+parse-yaml = 'pbd_declarative_jobs_spike:run_cli'
