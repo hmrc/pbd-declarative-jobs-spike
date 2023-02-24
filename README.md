@@ -85,6 +85,14 @@ new SbtMicroserviceJobBuilder("My Lovely Team/My Lovely Service Group", "my-love
    .build(this as DslFactory)
 ```
 
+## Limitations
+
+* No tests
+* Only supports a limit subset of jobs, and not all the various options on those
+* Very rudimentary templating. We'd probably want something like [jinja2](https://github.com/pallets/jinja/)
+* You have to copy the generated DSL to build-jobs yourself and raise a PR
+* We don't handle some flows, like folder name changes or deleted jobs
+
 ## License
 
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
