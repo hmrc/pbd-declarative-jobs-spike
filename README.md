@@ -1,7 +1,19 @@
 
 # pbd-declarative-jobs-spike
 
-This repo captures the output of an HMRC MDTP Build & Deploy (B&D) team hackday spike. It contains a proof of concept for translating high level repository metadata into jenkins-job-builder style DSL.
+This repo captures the output of an HMRC MDTP Build & Deploy (B&D) team hackday spike. It contains a proof of concept for translating high level repository metadata into [jenkins-job-builders](https://github.com/hmrc/jenkins-job-builders) style DSL for provisioning CI/CD jobs.
+
+## Purpose
+
+We have received feedback from our colleagues in PlatDocs that MDTP service team engineers sometimes find the process of defining groovy based job configuration difficult. Even when advice is provided, it can be hard to handle all of the various edge cases.
+
+Further, existing definitions in our internal [build-jobs repository](https://github.com/hmrc/build-jobs) are often implemented in a plethora of different ways. This can make it difficult for teams to understand what pattern they should be following, given that an exemplar might differ substantially differ from other implementations.
+
+We're also looking at streamlining the process for creating new microservices on the MDTP platform. It feels to us that insisting that teams explicitly provide us with CI/CD job definitions is perhaps redundant when it's something they need and could be implicit.
+
+Lastly, our current implementation ties our service team customers quite closely into the Jenkins ecosystem. By providing service teams with something more abstract, we can potentially ease the process of migrating to a different CI/CD service in future.
+
+To that end, we have decided to use some hackday time to explore the idea of automatically generating job DSL via abstract service metadata that is written to a `repository.yaml` file in the root of the service repository. This is a pattern which is gaining popularity across platform teams for driving various behaviours.
 
 ## Installation
 
@@ -29,7 +41,7 @@ environments:
 mongo: true
 ```
 
-In real life, we would catch changes to this configuration in the B&D API via GitHub events. For the purposes of this spike, we just run the parser manually:
+In real life, we would catch changes to this configuration in the B&D API via GitHub events and fetch the content. For the purposes of this spike, we just run the parser manually, which loads the config from the repo via a hardcoded path:
 
 ```bash
 poetry run parse-yaml
