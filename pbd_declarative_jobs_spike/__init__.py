@@ -8,7 +8,7 @@ def run_cli():
     service_name = "my-lovely-service" # This would be the repo name from the GitHub event
     with open(f"repository_yaml/{service_name}/repository.yaml", "r") as repository_yaml_file:
         repository_config = yaml.safe_load(repository_yaml_file)
-    build_folder = repository_config['build']['folder']
+    build_folder = repository_config['namespace']
     folder_hash = hashlib.md5(build_folder.encode('utf-8')).hexdigest()
     folder_file_name = f"dsl_{folder_hash}.groovy"
     service_file_name = f"dsl_{folder_hash}_{service_name.replace('-', '_')}.groovy"
